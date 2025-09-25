@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Footer } from '../App';
 
 function Register() {
   const [form, setForm] = useState({
@@ -67,36 +68,44 @@ function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: 'auto' }}>
-      <h2>Register</h2>
-      {errors.form && <div style={{ color: 'red' }}>{errors.form}</div>}
-      <div>
-        <label>Email:</label>
-        <input name="username" value={form.username} onChange={handleChange} />
-        {errors.username && <span style={{ color: 'red' }}>{errors.username}</span>}
+    <>
+      <div className="main-bg">
+        <div className="main-card" style={{ maxWidth: 420 }}>
+          <h2 style={{ color: '#3f51b5', marginBottom: 24, letterSpacing: 1 }}>Register</h2>
+          <form onSubmit={handleSubmit}>
+            {errors.form && <div style={{ color: 'red', marginBottom: 12 }}>{errors.form}</div>}
+            <div style={{ marginBottom: 18 }}>
+              <label style={{ display: 'block', marginBottom: 6 }}>Email:</label>
+              <input name="username" value={form.username} onChange={handleChange} style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #bbb' }} />
+              {errors.username && <span style={{ color: 'red', fontSize: '0.95em' }}>{errors.username}</span>}
+            </div>
+            <div style={{ marginBottom: 18 }}>
+              <label style={{ display: 'block', marginBottom: 6 }}>Password:</label>
+              <input name="password" type="password" value={form.password} onChange={handleChange} style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #bbb' }} />
+              {errors.password && <span style={{ color: 'red', fontSize: '0.95em' }}>{errors.password}</span>}
+            </div>
+            <div style={{ marginBottom: 18 }}>
+              <label style={{ display: 'block', marginBottom: 6 }}>Given Name:</label>
+              <input name="givenName" value={form.givenName} onChange={handleChange} style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #bbb' }} />
+              {errors.givenName && <span style={{ color: 'red', fontSize: '0.95em' }}>{errors.givenName}</span>}
+            </div>
+            <div style={{ marginBottom: 18 }}>
+              <label style={{ display: 'block', marginBottom: 6 }}>Family Name:</label>
+              <input name="familyName" value={form.familyName} onChange={handleChange} style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #bbb' }} />
+              {errors.familyName && <span style={{ color: 'red', fontSize: '0.95em' }}>{errors.familyName}</span>}
+            </div>
+            <div style={{ marginBottom: 18 }}>
+              <label style={{ display: 'block', marginBottom: 6 }}>Phone:</label>
+              <input name="phone" value={form.phone} onChange={handleChange} style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #bbb' }} />
+              {errors.phone && <span style={{ color: 'red', fontSize: '0.95em' }}>{errors.phone}</span>}
+            </div>
+            <button className="main-btn" type="submit">Register</button>
+            <button className="main-btn" type="button" style={{ background: '#bbb', color: '#222', marginLeft: 8 }} onClick={() => window.location.href = '/'}>Cancel</button>
+          </form>
+        </div>
       </div>
-      <div>
-        <label>Password:</label>
-        <input name="password" type="password" value={form.password} onChange={handleChange} />
-        {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
-      </div>
-      <div>
-        <label>Given Name:</label>
-        <input name="givenName" value={form.givenName} onChange={handleChange} />
-        {errors.givenName && <span style={{ color: 'red' }}>{errors.givenName}</span>}
-      </div>
-      <div>
-        <label>Family Name:</label>
-        <input name="familyName" value={form.familyName} onChange={handleChange} />
-        {errors.familyName && <span style={{ color: 'red' }}>{errors.familyName}</span>}
-      </div>
-      <div>
-        <label>Phone:</label>
-        <input name="phone" value={form.phone} onChange={handleChange} />
-        {errors.phone && <span style={{ color: 'red' }}>{errors.phone}</span>}
-      </div>
-      <button type="submit">Register</button>
-    </form>
+      <Footer />
+    </>
   );
 }
 
