@@ -31,19 +31,85 @@ function Navbar({ onCopyrightClick }) {
           <span className="navbar-toggler-icon"></span>
         </button>
         
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
+        <div className="collapse navbar-collapse right-side-menu" id="navbarNav">
+          <button 
+            className="menu-close" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav"
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+          <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link" href="#hero">Hero Section</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#three-column">Three-Column Section</a>
+              <button 
+                className="nav-link btn btn-link" 
+                onClick={() => {
+                  const heroSection = document.querySelector('#hero');
+                  if (heroSection) {
+                    heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                  // Close menu after navigation
+                  const navCollapse = document.getElementById('navbarNav');
+                  if (navCollapse) {
+                    navCollapse.classList.remove('show');
+                  }
+                }}
+                style={{ border: 'none', background: 'none', color: 'rgba(255,255,255,0.9)', padding: '1rem 1.5rem', textAlign: 'left', width: '100%' }}
+              >
+                Hero Section
+              </button>
             </li>
             <li className="nav-item">
               <button 
                 className="nav-link btn btn-link" 
-                onClick={onCopyrightClick}
-                style={{ border: 'none', background: 'none', color: 'rgba(255,255,255,0.9)', padding: '0.5rem 1rem' }}
+                onClick={() => {
+                  const albumsSection = document.querySelector('#three-column');
+                  if (albumsSection) {
+                    albumsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                  // Close menu after navigation
+                  const navCollapse = document.getElementById('navbarNav');
+                  if (navCollapse) {
+                    navCollapse.classList.remove('show');
+                  }
+                }}
+                style={{ border: 'none', background: 'none', color: 'rgba(255,255,255,0.9)', padding: '1rem 1.5rem', textAlign: 'left', width: '100%' }}
+              >
+                Albums
+              </button>
+            </li>
+            <li className="nav-item">
+              <button 
+                className="nav-link btn btn-link" 
+                onClick={() => {
+                  const discussionSection = document.querySelector('#discussion-board');
+                  if (discussionSection) {
+                    discussionSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }
+                  // Close menu after navigation
+                  const navCollapse = document.getElementById('navbarNav');
+                  if (navCollapse) {
+                    navCollapse.classList.remove('show');
+                  }
+                }}
+                style={{ border: 'none', background: 'none', color: 'rgba(255,255,255,0.9)', padding: '1rem 1.5rem', textAlign: 'left', width: '100%' }}
+              >
+                Discussion Board
+              </button>
+            </li>
+            <li className="nav-item">
+              <button 
+                className="nav-link btn btn-link" 
+                onClick={(e) => {
+                  onCopyrightClick();
+                  // Close menu after clicking
+                  const navCollapse = document.getElementById('navbarNav');
+                  if (navCollapse) {
+                    navCollapse.classList.remove('show');
+                  }
+                }}
+                style={{ border: 'none', background: 'none', color: 'rgba(255,255,255,0.9)', padding: '1rem 1.5rem', textAlign: 'left', width: '100%' }}
               >
                 Copyright
               </button>
@@ -56,6 +122,16 @@ function Navbar({ onCopyrightClick }) {
 }
 
 function HeroSection() {
+  const handleStartCreating = () => {
+    const discussionSection = document.querySelector('#discussion-board');
+    if (discussionSection) {
+      discussionSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  };
+
   return (
     <section id="hero" className="hero-section d-flex align-items-center justify-content-center text-white text-center">
       <div className="hero-overlay"></div>
@@ -67,7 +143,12 @@ function HeroSection() {
               A creative platform for meaningful conversations and artistic collaboration. 
               Connect with fellow creators, share your ideas, and engage in inspiring discussions.
             </p>
-            <button className="btn btn-lg custom-hero-btn">Start Creating</button>
+            <button 
+              className="btn btn-lg custom-hero-btn"
+              onClick={handleStartCreating}
+            >
+              Start Creating
+            </button>
           </div>
         </div>
       </div>
@@ -240,7 +321,7 @@ function MainPage() {
       <Navbar onCopyrightClick={handleCopyrightClick} />
       <HeroSection />
       <ThreeColumnSection />
-      <div className="main-bg"> 
+      <div id="discussion-board" className="main-bg"> 
         <div className="main-card"> 
           <h1 style={{ marginBottom: 24, color: '#01823f', letterSpacing: 1 }}>Discussion Board</h1>
           <button className="main-btn" onClick={() => window.location.href = '/register'}>Register</button><br/>
